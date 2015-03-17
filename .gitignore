@@ -2,6 +2,10 @@
 logs
 *.log
 
+*.map
+*.min.css
+/vendor
+
 # Runtime data
 pids
 *.pid
