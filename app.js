@@ -4,30 +4,64 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var multer  = require('multer');
 
+var session = require('express-session');
+var MongoStore = require('connect-mongo')(session);
 
-var app = express();
 var routes = require('./routes/router');
+var settings = require('./settings');
+
+var flash = require('connect-flash');
 //var routerController = require('./routes/controller').controller;
+var fs = require('fs');
+//var accessLog = fs.createWriteStream('access.log', {flags: 'a'});
+//var errorLog = fs.createWriteStream('error.log', {flags: 'a'});
+var app = express();
+
+var passport = require('passport'),
+    GithubStrategy = require('passport-github').Strategy;
+
 
 // view engine setup
 app.set('port', process.env.PORT || 3000);
 
 app.set('views', path.join(__dirname, 'views'));
 //app.set('view engine', 'ejs');
+//app.engine('.html', require('ejs').__express);
+
 app.engine('html', require('ejs').renderFile);
-//app.engine('.html', require('ejs').__express);  
 app.set('view engine', 'html');  
+app.use(multer({
+  dest: './public/images',
+  rename: function (fieldname, filename) {
+    return filename;
+  }
+}));
 
 
 // uncomment after placing your favicon in /public
 app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(logger('dev'));
+//app.use(logger({stream: accessLog}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+app.use(session({
+  secret: settings.cookieSecret,
+  key: settings.db,//cookie name
+  cookie: {maxAge: 1000 * 86400 * 30},//30 days
+  store: new MongoStore({
+    db: settings.db,
+    host: settings.host,
+    port: settings.port
+  })
+}));
+
+app.use(flash());
+//app.use(passport.initialize());//≥ı ºªØ Passport
 //app.get("*", routerController.index);
 //app.get("/data", routerController.index);
 routes(app);
@@ -66,6 +100,7 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
+
 
 app.listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));
