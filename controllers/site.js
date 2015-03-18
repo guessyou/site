@@ -20,16 +20,27 @@ var eventproxy = require('eventproxy');
 
 
 exports.index = function (req, res, next) {
-  // var page = parseInt(req.query.page, 10) || 1;
-  // page = page > 0 ? page : 1;
-  // var tab = req.query.tab || req.session.tab || 'all';
+  var page = parseInt(req.query.page, 10) || 1;
+  page = page > 0 ? page : 1;
 
-  // req.session.tab = tab;
+  var proxy = new eventproxy();
+  proxy.fail(next);
 
-  // var proxy = new eventproxy();
-  // proxy.fail(next);
+  // 取主题
+  // var query = {};
+  
+  res.render('index', { config: config });
 
-  // // 取主题
+};
+
+exports.index = function (req, res, next) {
+  var page = parseInt(req.query.page, 10) || 1;
+  page = page > 0 ? page : 1;
+
+  var proxy = new eventproxy();
+  proxy.fail(next);
+
+  // 取主题
   // var query = {};
   
   res.render('index', { config: config });
