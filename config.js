@@ -10,6 +10,12 @@ var config = {
 
   get mini_assets() { return !this.debug; }, // 是否启用静态文件的合并压缩，详见视图中的Loader
 
+
+
+  //
+  //基础数据配置
+  //
+  
   name: 'Fav', // 社区名字
   description: 'Fav：收藏社区-做优秀的可交互网络收藏夹，书签管理器', // 社区的描述
   keywords: 'Fav, 收藏社区, 网络收藏夹, 书签管理器, 收藏夹',
@@ -35,6 +41,12 @@ var config = {
   // 默认的Google tracker ID，自有站点请修改，申请地址：http://www.google.com/analytics/
   google_tracker_id: '',
 
+
+
+  //
+  // 数据库配置
+  // 
+
   // mongodb 配置
   db: 'mongodb://localhost/keeper',
   db_name: 'keeper',
@@ -42,6 +54,7 @@ var config = {
 
   session_secret: 'iDev_Keeper_IjOe', // 务必修改
   auth_cookie_name: 'iGuess_Keeper_PcTa',
+
 
   // 程序运行的端口
   port: 3020,
@@ -85,6 +98,7 @@ var config = {
     clientSecret: 'ce751d3347942618bd1b823c1c3b8ec3f74a7a88',
     callbackURL: 'http://localhost:3020/auth/github/callback'
   },
+  
   // 是否允许直接注册（否则只能走 github 的方式）
   allow_sign_up: true,
 
