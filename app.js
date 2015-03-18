@@ -35,7 +35,7 @@ var MongoStore = require('connect-mongo')(session);
 //var _ = require('lodash');
 //var csurf = require('csurf');
 // var compress = require('compression');
-// var bodyParser = require('body-parser');
+var bodyParser = require('body-parser');
 // var busboy = require('connect-busboy');
 // var errorhandler = require('errorhandler');
 //var cors = require('cors');
@@ -66,7 +66,7 @@ app.use(favicon(__dirname + '/public/favicon.ico'));
 //app.use(express.static(path.join(__dirname, 'public')));
 
 //app.use(Loader.less(__dirname));
-app.use('/public', express.static(staticDir));
+app.use(express.static(staticDir));
 
 // configuration in all env
 app.set('views', path.join(__dirname, 'views'));
@@ -91,7 +91,8 @@ app.use(require('cookie-parser')(config.session_secret));
 app.use(session({
   secret: config.session_secret,
   store: new MongoStore({
-    url: config.db
+    url: config.db,
+    auto_reconnect: true
   }),
   resave: true,
   saveUninitialized: true,
@@ -150,13 +151,13 @@ app.use('/', webRouter);
 //app.use('/api/v1', cors(), apiRouterV1);
 
 // error handler
-if (config.debug) {
-  app.use(errorhandler());
-} else {
-  app.use(function (err, req, res, next) {
-    return res.status(500).send('500 status');
-  });
-}
+// if (config.debug) {
+//   app.use(errorhandler());
+// } else {
+//   app.use(function (err, req, res, next) {
+//     return res.status(500).send('500 status');
+//   });
+// }
 
 app.listen(config.port, function () {
   console.log("NodeClub listening on port %d in %s mode", config.port, app.settings.env);

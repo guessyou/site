@@ -7,7 +7,7 @@
 var express = require('express'),
     router = express.Router();
 
-var config = require('./config'),
+var config = require('../config'),
     crypto = require('crypto'),
     passport = require('passport');
 
@@ -18,7 +18,7 @@ var config = require('./config'),
 //     passport = require('passport');
 
 // var rss = require('./controllers/rss');
-var site = require('./controllers/site');
+var site = require('../controllers/site');
 // var sign = require('./controllers/sign');
 // var user = require('./controllers/user');
 // var topic = require('./controllers/topic');
@@ -32,9 +32,9 @@ var site = require('./controllers/site');
 // home page
 router.get('/', site.index);
 // sitemap
-router.get('/sitemap.xml', site.sitemap);
+//router.get('/sitemap.xml', site.sitemap);
 // mobile app download
-router.get('/app/download', site.appDownload);
+//router.get('/app/download', site.appDownload);
 
 
 module.exports = router;

@@ -36,7 +36,7 @@ var config = {
   google_tracker_id: '',
 
   // mongodb 配置
-  db: 'mongodb://127.0.0.1/keeper',
+  db: 'mongodb://localhost/keeper',
   db_name: 'keeper',
 
 

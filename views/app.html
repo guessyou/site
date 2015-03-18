@@ -19,6 +19,7 @@
   </header>
   <section class="_sidebar">
     <div class="_list">
+      <%var list = [];%>
       <%list.forEach(function(v,i){%>
         <a href="/<%= v.slug %>/" class="_list-item _icon-<%= v.icon %> _list-dir"><span class="_list-arrow"></span><%= v.name %></a>
       <%})%>
