@@ -8,40 +8,43 @@
 
 var config = require('./config');
 
-if (!config.debug) {
-  require('newrelic');
-}
+// if (!config.debug) {
+//   require('newrelic');
+// }
 
 var path = require('path');
-var Loader = require('loader');
+//var Loader = require('loader');
 var express = require('express');
 
 var favicon = require('serve-favicon');
-var logger = require('morgan');
+//var logger = require('morgan');
 var cookieParser = require('cookie-parser');
-var multer  = require('multer');
+//var multer  = require('multer');
 
 var session = require('express-session');
 var passport = require('passport');
-require('./models');
-var GitHubStrategy = require('passport-github').Strategy;
-var githubStrategyMiddleware = require('./middlewares/github_strategy');
-var webRouter = require('./web_router');
-var apiRouterV1 = require('./api_router_v1');
-var auth = require('./middlewares/auth');
+
+// require('./models');
+// var GitHubStrategy = require('passport-github').Strategy;
+// var githubStrategyMiddleware = require('./middlewares/github_strategy');
+var webRouter = require('./routes/web_router');
+//var apiRouterV1 = require('./routes/api_router_v1');
+// var auth = require('./middlewares/auth');
+
 var MongoStore = require('connect-mongo')(session);
-var _ = require('lodash');
-var csurf = require('csurf');
-var compress = require('compression');
-var bodyParser = require('body-parser');
-var busboy = require('connect-busboy');
-var errorhandler = require('errorhandler');
-var cors = require('cors');
+//var _ = require('lodash');
+//var csurf = require('csurf');
+// var compress = require('compression');
+// var bodyParser = require('body-parser');
+// var busboy = require('connect-busboy');
+// var errorhandler = require('errorhandler');
+//var cors = require('cors');
 
 // 静态文件目录
 var staticDir = path.join(__dirname, 'public');
 
 // assets
+/*
 var assets = {};
 if (config.mini_assets) {
   try {
@@ -51,6 +54,7 @@ if (config.mini_assets) {
     throw e;
   }
 }
+*/
 
 var urlinfo = require('url').parse(config.host);
 config.hostname = urlinfo.hostname || config.host;
@@ -61,7 +65,7 @@ var app = express();
 app.use(favicon(__dirname + '/public/favicon.ico'));
 //app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(Loader.less(__dirname));
+//app.use(Loader.less(__dirname));
 app.use('/public', express.static(staticDir));
 
 // configuration in all env
@@ -81,9 +85,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
-app.use(require('method-override')());
+//app.use(require('method-override')());
 app.use(require('cookie-parser')(config.session_secret));
-app.use(compress());
+//app.use(compress());
 app.use(session({
   secret: config.session_secret,
   store: new MongoStore({
@@ -96,9 +100,10 @@ app.use(session({
 app.use(passport.initialize());
 
 // custom middleware
-app.use(auth.authUser);
-app.use(auth.blockUser());
+//app.use(auth.authUser);
+//app.use(auth.blockUser());
 
+/*
 if (!config.debug) {
   app.use(function (req, res, next) {
     if (req.path.indexOf('/api') === -1) {
@@ -132,16 +137,17 @@ passport.deserializeUser(function (user, done) {
   done(null, user);
 });
 passport.use(new GitHubStrategy(config.GITHUB_OAUTH, githubStrategyMiddleware));
+*/
 
-app.use(busboy({
-  limits: {
-    fileSize: 10 * 1024 * 1024 // 10MB
-  }
-}));
+// app.use(busboy({
+//   limits: {
+//     fileSize: 10 * 1024 * 1024 // 10MB
+//   }
+// }));
 
 // routes
 app.use('/', webRouter);
-app.use('/api/v1', cors(), apiRouterV1);
+//app.use('/api/v1', cors(), apiRouterV1);
 
 // error handler
 if (config.debug) {

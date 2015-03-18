@@ -19,13 +19,13 @@ var config = {
     '<meta name="author" content="Group@GuessU" />'
   ],
   site_logo: '/public/images/logo.svg', // default is `name`
-  site_icon: '/public/favicon', // 默认没有 favicon, 这里填写网址
+  site_icon: '/public/favicon.ico', // 默认没有 favicon, 这里填写网址
   // 右上角的导航区
   site_navs: [
     // 格式 [ path, title, [target=''] ]
-    [ '/tips', '提示' ]
-    [ '/about', '关于' ]
-    [ '/news', '更新' ]
+    [ '/tips', '提示' ],
+    [ '/about', '关于' ],
+    [ '/news', '更新' ],
     [ '/offline', '离线' ]
   ],
   // cdn host，如 http://cnodejs.qiniudn.com
@@ -40,8 +40,8 @@ var config = {
   db_name: 'keeper',
 
 
-  session_secret: 'iDev_Keeper', // 务必修改
-  auth_cookie_name: 'iGuess_Keeper',
+  session_secret: 'iDev_Keeper_IjOe', // 务必修改
+  auth_cookie_name: 'iGuess_Keeper_PcTa',
 
   // 程序运行的端口
   port: 3020,
