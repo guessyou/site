@@ -12,11 +12,11 @@ Login
 
 ####项目框架设计
 
-可服务器端渲染，亦可本地单页面应用操作
+首先实现服务器端的渲染，之后再扩展实现单页面应用操作
 
 ```js
 src/js
-|-  data          //数据
+|-  data          //一些模拟数据，最终这里放置缓存的数据
 |     App.js
 |     docs.js           //首页数据
 |     news.json         //更新提醒数据
@@ -30,50 +30,35 @@ src/js
 |
 |- /app           //项目文件
 |   |- app.js           //主程序
-|   |- config.js        //配置
-|   |- router.js        //路由
-|   |- settings.js      //默认设置
-|   |- db.js            //数据
+|   |- config.js        //配置(包含以下两部分)
+|       |- settings.js      //默认设置
+|       |- db.js            //数据库
+|
 |   |- appcache.js      //缓存
 |   |- searcher.js      //搜索
 |   |- shortcuts.js     //快捷键
 |
-|- /models        //模型
-|   |- model.js         //
-|   |- doc.js           //
-|   |- entry.js         //
-|   |- type.js          //
+|- /routes        //路由
+|   |- web_router.js    //页面路由
+|   |- api_router_v1.js //管理后台路由
 |
-|- /collections   //集合
-|   |- collection.js    //
-|   |- docs.js          //
-|   |- entries.js       //
-|   |- types.js         //
+|- /models        //模型
+|   |- model.js
+|
+|- /controllers   //控制器
+|   |- controllers.js
 |
 |- /views         //视图
-|   |- view.js          //
-|   |- /layout
-|   |- /content
-|   |- /pages
-|   |- /sidebar
-|   |- /search
-|   |- /list
-|   |- /misc
+|   |- view.js
+|   |- ...
 |
 |- /templates     //模板
-|   |- base.js          //
-|   |- error_tmpl.js
-|   |- notice_tmpl.js
-|   |- notif_tmpl.js
-|   |- path_tmpl.js
-|   |- sidebar_tmpl.js
-|   |- /pages
-|   |   |- about_tmpl.js
-|   |   |- help_tmpl.js
-|   |   |- new_tmpl.js
-|   |   |- offine_tmpl.js
-|   |   |- root_tmpl.js
-|   |   |- type_tmpl.js
+|   |- layout.html
+|   |- index.html
+|   |- main.html
+|   |- sidebar.html
+|   |- list.html
+|   |- path.html
 |
 |- /test           //测试
 |- /vendor         //外部依赖
