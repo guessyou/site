@@ -38,53 +38,63 @@ router.get('/', site.index);
 
 
 
-//需要实现的路由
+
+
+//
+// Our Routes
+// 分类 标签 帮助 搜索 用户 登录 注册 增删改查
+//
+
+var routes = [{
+    name: "index",
+    match: /^\/(index|index.html)?/i
+},{
+    name: "list",
+    match: /^\/(javascript|js|html|css)(\/\w)?/i
+}, {
+    name: "tags",
+    match: /^\/tags\/[\s\S]+/i
+}, {
+    name: "search",
+    match: /^\/q\/[\s\S]+/i
+}, {
+    name: "golbal_objects",
+    match: /^\/golbal_objects\/[\s\S]+/i
+}];
+//return routes;
+
 var routes = [
-    ['*', 'before'],
     ['/', 'root'],
-    ['/offline', 'offline'],
-    ['/about', 'about'],
-    ['/news', 'news'],
-    ['/help', 'help'],
-    ['/:doc-:type/', 'type'],
-    ['/:doc/', 'doc'],
-    ['/:doc/:path(*)', 'entry'],
+    ['/tags', 'tags'],  //标签
+    ['/tags/:tag', 'tag'],
+    ['/help', 'help'],  //帮助
+    ['/search', 'search'],  //搜索
+
+    ['/users', 'users'],//用户
+    ['/user/login', 'login'],
+    ['/user/register', 'register'],
+    ['/user/forgot', 'forgot'], //忘记密码
+    ['/user/oauth/:site', 'oauth'], //第三方登录 github weibo qq
+    ['/user/:user', 'user'],
+
+    ['', ''],  //添加
+    ['', ''],  //编辑
+    ['', ''],  //删除等
+    
+    ['/topic/:topic', 'topic'],  //话题
+
+    ['/offline', 'offline'],//离线
+    ['/about', 'about'],//关于
+    ['/news', 'news'],  //更新
+    ['/explore', 'explore'],  //发现
+    ['/group', 'group'],  //组织
+    ['/events', 'events'],//事件
+    ['/jobs/:job', 'jobs'],
+
     ['*', 'notFound']
 ];
 
 
-
-var routes = [
-    //知乎
-    ['/topic/:topic[hot|top|questions]', 'topic'],//话题
-    ['/explore', 'explore'],//发现
-    ['/people:user', 'user'],//用户
-
-    //http://stackoverflow.com/
-    ['/tags/:tag', 'tag'],//标签
-    ['/tags/:tag', 'tag']//标签
-    // /search?q=aaawww
-    // /tagged/html
-    // tour
-
-    //http://segmentfault.com/
-    ['/tags/', 'tag'],//标签首页
-    ['/blogs/', 'blogs'],//文章首页
-    ['/events/', 'events'],//活动首页
-    ['/users/', 'users'],//用户首页
-    ['/sites/', 'sites'],//子站
-    ['/t/:tag[blogs|info]', 'tag'],//标签
-    ['/p/:page', 'page'],//文章
-    ['/blogs/:user/:page', 'blogs'],//文章
-    ['/u/:user', 'user'],//用户
-    ['/user/re', 'user'],//用户
-    //http://segmentfault.com/user/oauth/google
-    //http://segmentfault.com/user/register
-    //http://segmentfault.com/user/login
-
-    ['/questions/[newest|hottest|unanswered]', 'questions'],//问答
-    []
-];
 
 
 

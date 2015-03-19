@@ -15,6 +15,7 @@ var config = require('./config');
 var path = require('path');
 //var Loader = require('loader');
 var express = require('express');
+//var partials = require('express-partials');
 
 var favicon = require('serve-favicon');
 //var logger = require('morgan');
@@ -66,14 +67,17 @@ app.use(favicon(__dirname + '/public/favicon.ico'));
 //app.use(express.static(path.join(__dirname, 'public')));
 
 //app.use(Loader.less(__dirname));
-app.use(express.static(staticDir));
+app.use('/public', express.static(staticDir));
+
+// load the express-partials middleware
+//app.use(partials());
 
 // configuration in all env
 app.set('views', path.join(__dirname, 'views'));
 
-//app.set('view engine', 'ejs');
-//app.engine('html', require('ejs').renderFile);
-//app.set('view engine', 'html');
+// app.set('view engine', 'ejs');
+// app.engine('html', require('ejs').renderFile);
+// app.set('view engine', 'html');
 
 //使用ejs母版页
 app.set('view engine', 'html');
@@ -92,7 +96,7 @@ app.use(session({
   secret: config.session_secret,
   store: new MongoStore({
     url: config.db,
-    auto_reconnect: true
+    autoReconnect: true
   }),
   resave: true,
   saveUninitialized: true,
@@ -160,7 +164,7 @@ app.use('/', webRouter);
 // }
 
 app.listen(config.port, function () {
-  console.log("NodeClub listening on port %d in %s mode", config.port, app.settings.env);
+  console.log("Developers listening on port %d in %s mode", config.port, app.settings.env);
   console.log("God bless love....");
   console.log("You can debug your app with http://" + config.hostname + ':' + config.port);
 });
