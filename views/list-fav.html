@@ -49,6 +49,26 @@
                 </span>
             </dd>
         </dl>
+        <%list.forEach(function(v,i){%>
+        <dl class="item">
+            <dt>
+                <i class="votes" title="赞"></i>
+                <div class="views" title="浏览量"><%=v.pv || 0%><i>浏览</i></div>
+            </dt>
+            <dd class="summary">
+                <h3 class="link-tit"><img class="favicon" src="<%=v.favicon%>"><%=v.title%> <small></small></a></h3>
+                <p><%=v.desc%></p>
+                <%if(v.tags && v.tags.length){%>
+                <span class="post-tags">
+                    标签：
+                    <%v.tags.forEach(function(tag,i){%>
+                    <a href="/tags/<%=tag.name%>" rel="tag" class="tag tag-sm"><%=tag.name%></a>
+                    <%})%>
+                </span>
+                <%}%>
+            </dd>
+        </dl>
+        <%})%>
     </div> <!-- //.list-stream -->
 
     <!--<div class="text-center">

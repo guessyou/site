@@ -29,6 +29,11 @@ var site = require('../controllers/site');
 // var staticController  = require('./controllers/static');
 
 
+
+
+
+
+router.get('*', site.before);
 // home page
 router.get('/', site.index);
 // sitemap
@@ -36,9 +41,14 @@ router.get('/', site.index);
 // mobile app download
 //router.get('/app/download', site.appDownload);
 
+// router.get('/help', site.help);
+// router.get('/news', site.news);
+// router.get('/about', site.about);
+// router.get('/offline', site.offline);
 
 
 
+// router.get('/*', site.notFound);
 
 //
 // Our Routes
@@ -63,11 +73,17 @@ var routes = [{
 }];
 //return routes;
 
+//需要实现的路由
 var routes = [
+    ['*', 'before'], //初始化整体界面
     ['/', 'root'],
+    ['/topic/:topic', 'topic'],  //话题
     ['/tags', 'tags'],  //标签
     ['/tags/:tag', 'tag'],
     ['/help', 'help'],  //帮助
+    ['/news', 'news'],  //更新
+    ['/about', 'about'],//关于
+    ['/offline', 'offline'],//离线
     ['/search', 'search'],  //搜索
 
     ['/users', 'users'],//用户
@@ -75,17 +91,12 @@ var routes = [
     ['/user/register', 'register'],
     ['/user/forgot', 'forgot'], //忘记密码
     ['/user/oauth/:site', 'oauth'], //第三方登录 github weibo qq
-    ['/user/:user', 'user'],
+    ['/u/:user', 'user'],
 
     ['', ''],  //添加
     ['', ''],  //编辑
     ['', ''],  //删除等
-    
-    ['/topic/:topic', 'topic'],  //话题
 
-    ['/offline', 'offline'],//离线
-    ['/about', 'about'],//关于
-    ['/news', 'news'],  //更新
     ['/explore', 'explore'],  //发现
     ['/group', 'group'],  //组织
     ['/events', 'events'],//事件
