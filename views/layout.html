@@ -15,6 +15,34 @@
 <!-- <body class="_booting _noscript"> -->
 <body class="">
 <noscript class="_fail">Developer requires JavaScript to run.</noscript>
-<%- include index.html %>
+  <div class="_app">
+    <header class="_header">
+      <a class="_home-link"></a>
+      <a class="_menu-link"></a>
+      <form class="_search">
+        <input type="search" class="_search-input" placeholder="Search&hellip;" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" maxlength="20">
+        <a class="_search-clear"></a>
+        <div class="_search-tag"></div>
+      </form>
+      <h1 class="_logo">
+        <a href="/" class="_nav-link">Developer</a>
+      </h1>
+      <nav class="_nav">
+        <!-- <a href="/offline" class="_nav-link">Offline</a> -->
+        <a href="/about" class="_nav-link">About</a>
+        <a href="/news" class="_nav-link">News</a>
+        <a href="/help" class="_nav-link">Tips</a>
+      </nav>
+    </header>
+    <section class="_sidebar">
+      <%- include sidebar.html %>
+    </section>
+    <section class="_container">
+      <!-- <div class="_content _content-loading"> -->
+      <div class="_content">
+        <%- include list-fav.html %>
+      </div>
+    </section>
+  </div>
 </body>
 </html>
