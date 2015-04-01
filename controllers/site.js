@@ -12,6 +12,11 @@
 var config = require('../config');
 var xmlbuilder = require('xmlbuilder');
 var eventproxy = require('eventproxy');
+var async = require('async');
+
+// async.auto({
+//   readData: async.apply(fs.readFile, 'data.txt', 'utf-8')
+// }, callback);
 
 var Model = require('../models/model.js');
 var request = require("../models/request").request;
@@ -30,7 +35,7 @@ var request = require("../models/request").request;
   两块区域处理完毕，统一渲染界面
  */
 
-exports.before = function (req, res, next) {
+
   // var page = parseInt(req.query.page, 10) || 1;
   // page = page > 0 ? page : 1;
 
@@ -47,6 +52,9 @@ exports.before = function (req, res, next) {
   //res.render('index', { config: config });
 
   //var response = Model.categoryAll(req, res);
+
+exports.before = function (req, res, next) {
+
   
   request("/category/readAll", {}, function(err, data){
       if(err){
@@ -62,13 +70,18 @@ exports.before = function (req, res, next) {
         });
 
         res.render('index', { 'list': category });
+
+        //sidebar
+        
         //res.send("var sideBarData = " + JSON.stringify(category, null, 4) + ";");
       }
   });
 
 }
 
+
 exports.index = function (req, res, next) {
+
 
   // var data = [];
   // res.render('index', { 'list': data });
