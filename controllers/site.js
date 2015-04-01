@@ -80,9 +80,25 @@ exports.before = function (req, res, next) {
 }
 
 
+
 exports.index = function (req, res, next) {
 
-
+    async.auto({
+        get_sidebar_data: function(callback){
+            console.log('in get_sidebar_data');
+            // async code to get some data 
+            callback(null, 'data', 'converted to array');
+        },
+        get_index_data: function(callback){
+            console.log('in get_index_data');
+            // async code to create a directory to store a file in 
+            // this is run at the same time as getting the data 
+            callback(null, 'folder');
+        }
+    }, function(err, results) {
+        
+        
+    });
   // var data = [];
   // res.render('index', { 'list': data });
 }

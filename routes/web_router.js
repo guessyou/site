@@ -33,7 +33,7 @@ var site = require('../controllers/site');
 
 
 
-router.get('*', site.before);
+//router.get('*', site.before);
 // home page
 router.get('/', site.index);
 // sitemap
