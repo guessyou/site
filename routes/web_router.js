@@ -29,7 +29,43 @@ var site = require('../controllers/site');
 // var staticController  = require('./controllers/static');
 
 
+//需要实现的路由
+var routes = [
+    ['*', 'before'], //初始化整体界面
+    ['/', 'root'],
+    ['/topic/:topic', 'topic'],  //话题
+    ['/tags', 'tags'],  //标签
+    ['/tags/:tag', 'tag'],
+    ['/help', 'help'],  //帮助
+    ['/news', 'news'],  //更新
+    ['/about', 'about'],//关于
+    ['/offline', 'offline'],//离线
+    ['/search', 'search'],  //搜索
 
+
+
+    ['/users', 'users'],//用户
+    ['/user/login', 'login'],
+    ['/user/register', 'register'],
+    ['/user/forgot', 'forgot'], //忘记密码
+    ['/user/oauth/:site', 'oauth'], //第三方登录 github weibo qq
+    ['/u/:user', 'user'],
+
+    ['a/:article', 'article'],  //文章
+    ['', ''],  //添加
+    ['', ''],  //编辑
+    ['', ''],  //删除等
+
+    ['/explore', 'explore'],  //发现
+    ['/group', 'group'],  //组织
+    ['/events', 'events'],//事件
+    ['/jobs/:job', 'jobs'],
+
+    //expert 专家
+    //主题/系列
+
+    ['*', 'notFound']
+];
 
 
 
@@ -73,37 +109,7 @@ var routes = [{
 }];
 //return routes;
 
-//需要实现的路由
-var routes = [
-    ['*', 'before'], //初始化整体界面
-    ['/', 'root'],
-    ['/topic/:topic', 'topic'],  //话题
-    ['/tags', 'tags'],  //标签
-    ['/tags/:tag', 'tag'],
-    ['/help', 'help'],  //帮助
-    ['/news', 'news'],  //更新
-    ['/about', 'about'],//关于
-    ['/offline', 'offline'],//离线
-    ['/search', 'search'],  //搜索
 
-    ['/users', 'users'],//用户
-    ['/user/login', 'login'],
-    ['/user/register', 'register'],
-    ['/user/forgot', 'forgot'], //忘记密码
-    ['/user/oauth/:site', 'oauth'], //第三方登录 github weibo qq
-    ['/u/:user', 'user'],
-
-    ['', ''],  //添加
-    ['', ''],  //编辑
-    ['', ''],  //删除等
-
-    ['/explore', 'explore'],  //发现
-    ['/group', 'group'],  //组织
-    ['/events', 'events'],//事件
-    ['/jobs/:job', 'jobs'],
-
-    ['*', 'notFound']
-];
 
 
 

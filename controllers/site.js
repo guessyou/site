@@ -55,26 +55,26 @@ var request = require("../models/request").request;
 
 exports.before = function (req, res, next) {
   
-  request("/category/readAll", {}, function(err, data){
-      if(err){
-        res.render('404', {errmsg: err.message});
-      } else{
+  // request("/category/readAll", {}, function(err, data){
+  //     if(err){
+  //       res.render('404', {errmsg: err.message});
+  //     } else{
 
-        //res.setHeader("Content-Type", "text/javascript");
-        var json = JSON.parse(data);
-        var category = json.body.category;
+  //       //res.setHeader("Content-Type", "text/javascript");
+  //       var json = JSON.parse(data);
+  //       var category = json.body.category;
 
-        category = category.filter(function(item){
-            return !item._parent_id
-        });
+  //       category = category.filter(function(item){
+  //           return !item._parent_id
+  //       });
 
-        res.render('index', { 'list': category });
+  //       res.render('index', { 'list': category });
 
-        //sidebar
+  //       //sidebar
         
-        //res.send("var sideBarData = " + JSON.stringify(category, null, 4) + ";");
-      }
-  });
+  //       //res.send("var sideBarData = " + JSON.stringify(category, null, 4) + ";");
+  //     }
+  // });
 
 }
 
@@ -160,3 +160,5 @@ exports.news = function (req, res, next) {
         res.render('index', { 'list': category,'route': route });
     });
 }
+
+
