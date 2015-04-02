@@ -54,7 +54,6 @@ var request = require("../models/request").request;
   //var response = Model.categoryAll(req, res);
 
 exports.before = function (req, res, next) {
-
   
   request("/category/readAll", {}, function(err, data){
       if(err){
@@ -80,35 +79,84 @@ exports.before = function (req, res, next) {
 }
 
 
+var asyncFnc = function(obj,callback){
+    obj.sidebar = function(callback){
+        console.log('... get_sidebar_data');
+
+        request("/category/readAll", {}, function(err, data){
+            var json = JSON.parse(data);
+            var category = json.body.category;
+
+            var sidebar_data = category.filter(function(item){
+                return !item._parent_id
+            });
+
+            callback(null, sidebar_data);
+        });
+        // async code to get some data 
+        //callback(null, 'data', 'converted to array');
+    }
+    async.auto(obj,function(err, data) {
+        if(err){
+            res.render('404', {errmsg: err.message});
+        }else{
+            callback(data);
+        }
+    });
+};
 
 exports.index = function (req, res, next) {
-
-    async.auto({
-        get_sidebar_data: function(callback){
-            console.log('in get_sidebar_data');
-            // async code to get some data 
-            callback(null, 'data', 'converted to array');
-        },
-        get_index_data: function(callback){
-            console.log('in get_index_data');
-            // async code to create a directory to store a file in 
-            // this is run at the same time as getting the data 
-            callback(null, 'folder');
+    asyncFnc({
+        route: function(callback){
+            console.log('... get_index_data');
+            var data1 = '首页';
+            callback(null, data1);
         }
-    }, function(err, results) {
-        
-        
+    }, function(data){
+        var category = data.sidebar;
+        var route = data.route;
+        res.render('index', { 'list': category,'route': route });
     });
-  // var data = [];
-  // res.render('index', { 'list': data });
 }
 
 exports.about = function (req, res, next) {
-  var data = [];
-  res.render('index', { 'list': data });
+    asyncFnc({
+        route: function(callback){
+            console.log('... get_index_data');
+            var data1 = '关于我们';
+            callback(null, data1);
+        }
+    }, function(data){
+        var category = data.sidebar;
+        var route = data.route;
+        res.render('index', { 'list': category,'route': route });
+    });
 }
 
 exports.help = function (req, res, next) {
-  var data = [];
-  res.render('index', { 'list': data });
+    asyncFnc({
+        route: function(callback){
+            console.log('... get_index_data');
+            var data1 = '帮助';
+            callback(null, data1);
+        }
+    }, function(data){
+        var category = data.sidebar;
+        var route = data.route;
+        res.render('index', { 'list': category,'route': route });
+    });
+}
+
+exports.news = function (req, res, next) {
+    asyncFnc({
+        route: function(callback){
+            console.log('... get_index_data');
+            var data1 = '更新';
+            callback(null, data1);
+        }
+    }, function(data){
+        var category = data.sidebar;
+        var route = data.route;
+        res.render('index', { 'list': category,'route': route });
+    });
 }

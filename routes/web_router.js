@@ -41,10 +41,10 @@ router.get('/', site.index);
 // mobile app download
 //router.get('/app/download', site.appDownload);
 
-// router.get('/help', site.help);
-// router.get('/news', site.news);
-// router.get('/about', site.about);
-// router.get('/offline', site.offline);
+router.get('/help', site.help);
+router.get('/news', site.news);
+router.get('/about', site.about);
+//router.get('/offline', site.offline);
 
 
 
