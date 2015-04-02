@@ -12,7 +12,8 @@
 var config = require('../config');
 var xmlbuilder = require('xmlbuilder');
 var eventproxy = require('eventproxy');
-var async = require('async');
+var asyncFnc = require('./asyncfnc');
+
 
 // async.auto({
 //   readData: async.apply(fs.readFile, 'data.txt', 'utf-8')
@@ -79,32 +80,6 @@ exports.before = function (req, res, next) {
 }
 
 
-var asyncFnc = function(obj,callback){
-    obj.sidebar = function(callback){
-        console.log('... get_sidebar_data');
-
-        request("/category/readAll", {}, function(err, data){
-            var json = JSON.parse(data);
-            var category = json.body.category;
-
-            var sidebar_data = category.filter(function(item){
-                return !item._parent_id
-            });
-
-            callback(null, sidebar_data);
-        });
-        // async code to get some data 
-        //callback(null, 'data', 'converted to array');
-    }
-    async.auto(obj,function(err, data) {
-        if(err){
-            res.render('404', {errmsg: err.message});
-        }else{
-            callback(data);
-        }
-    });
-};
-
 exports.index = function (req, res, next) {
     asyncFnc({
         route: function(callback){
@@ -119,46 +94,6 @@ exports.index = function (req, res, next) {
     });
 }
 
-exports.about = function (req, res, next) {
-    asyncFnc({
-        route: function(callback){
-            console.log('... get_index_data');
-            var data1 = '关于我们';
-            callback(null, data1);
-        }
-    }, function(data){
-        var category = data.sidebar;
-        var route = data.route;
-        res.render('index', { 'list': category,'route': route });
-    });
-}
 
-exports.help = function (req, res, next) {
-    asyncFnc({
-        route: function(callback){
-            console.log('... get_index_data');
-            var data1 = '帮助';
-            callback(null, data1);
-        }
-    }, function(data){
-        var category = data.sidebar;
-        var route = data.route;
-        res.render('index', { 'list': category,'route': route });
-    });
-}
-
-exports.news = function (req, res, next) {
-    asyncFnc({
-        route: function(callback){
-            console.log('... get_index_data');
-            var data1 = '更新';
-            callback(null, data1);
-        }
-    }, function(data){
-        var category = data.sidebar;
-        var route = data.route;
-        res.render('index', { 'list': category,'route': route });
-    });
-}
 
 
