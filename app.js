@@ -41,9 +41,6 @@ var bodyParser = require('body-parser');
 // var errorhandler = require('errorhandler');
 //var cors = require('cors');
 
-// 静态文件目录
-var staticDir = path.join(__dirname, 'public');
-
 // assets
 /*
 var assets = {};
@@ -62,12 +59,15 @@ config.hostname = urlinfo.hostname || config.host;
 
 var app = express();
 
+// 静态文件目录
 // uncomment after placing your favicon in /public
+var staticDir = path.join(__dirname, 'public');
 app.use(favicon(__dirname + '/public/favicon.ico'));
-//app.use(express.static(path.join(__dirname, 'public')));
-
 //app.use(Loader.less(__dirname));
-app.use('/public', express.static(staticDir));
+//app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(staticDir));
+//app.use('/public', express.static(staticDir));
+
 
 // load the express-partials middleware
 //app.use(partials());
