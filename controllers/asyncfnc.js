@@ -9,6 +9,8 @@ var asyncFnc = function(obj,callback){
 
         request("/category/readAll", {}, function(err, data){
             var json = JSON.parse(data);
+
+            if(!json || !json.body) return;
             var category = json.body.category;
 
             var sidebar_data = category.filter(function(item){

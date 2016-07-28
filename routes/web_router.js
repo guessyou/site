@@ -8,7 +8,7 @@ var express = require('express'),
     router = express.Router();
 
 var config = require('../config'),
-    crypto = require('crypto'),
+    // crypto = require('crypto'),
     passport = require('passport');
 
 // var crypto = require('crypto'),

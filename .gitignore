@@ -5,7 +5,7 @@ logs
 *.map
 *.min.css
 /vendor
-
+/build
 # Runtime data
 pids
 *.pid

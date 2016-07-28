@@ -32,7 +32,7 @@ var webRouter = require('./routes/web_router');
 //var apiRouterV1 = require('./routes/api_router_v1');
 // var auth = require('./middlewares/auth');
 
-var MongoStore = require('connect-mongo')(session);
+// var MongoStore = require('connect-mongo')(session);
 //var _ = require('lodash');
 //var csurf = require('csurf');
 // var compress = require('compression');
@@ -94,12 +94,12 @@ app.use(require('cookie-parser')(config.session_secret));
 //app.use(compress());
 app.use(session({
   secret: config.session_secret,
-  store: new MongoStore({
-    url: config.db,
-    autoReconnect: true
-  }),
-  resave: true,
-  saveUninitialized: true,
+  // store: new MongoStore({
+  //   url: config.db,
+  //   autoReconnect: true
+  // }),
+  // resave: true,
+  // saveUninitialized: true,
 }));
 
 app.use(passport.initialize());
